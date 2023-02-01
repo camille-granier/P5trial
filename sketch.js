@@ -21,7 +21,11 @@ circleX += xSpeed
 circleY += ySpeed
   // TODO: If statment to inverse direction when ball hits left or right edge
 
-
+if(circleX < 0 || circleX > width) {
+  xSpeed = xSpeed *-1
+}
   // TODO: If statment to inverse direction when ball hits top or bottom edge
-
+if ( circleY < 0 || circleY > height) {
+  ySpeed = ySpeed *-1
+}
 }
