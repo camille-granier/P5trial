@@ -1,31 +1,29 @@
 // Global variables
-let circleX = 300;
-let circleY = 0;
-let xSpeed = 1;
-let ySpeed = 1;
+let t; 
+let x; // X position
+let y; // Y position
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  background(0);
+  t = 0;
 }
 
 function draw() {
-  background(0);
-  // Bouncing ball
-  ellipse(circleX, circleY, 120);
-  
-  // TODO: Increment the x position of the ball
+  background(0, 16);
 
-circleX += xSpeed
-  // TODO: Increment the y position of the ball
+  noStroke();
+  fill(255);
 
-circleY += ySpeed
-  // TODO: If statment to inverse direction when ball hits left or right edge
+  // TODO: Set the x position to incorporate the noise function
+x = width * noise(t+15)
 
-if(circleX < 0 || circleX > width) {
-  xSpeed = xSpeed *-1
-}
-  // TODO: If statment to inverse direction when ball hits top or bottom edge
-if ( circleY < 0 || circleY > height) {
-  ySpeed = ySpeed *-1
-}
+  // TODO: Set the y position to incorporate the noise function
+y = height * noise(t + 5)
+
+  // TODO: Draw an ellipse with the variables for x and y passed in
+ellipse(x, y, 150, 150)
+
+  // TODO: Increment the t variable to control the noise amount
+t += 0.005
 }
