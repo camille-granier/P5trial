@@ -1,29 +1,33 @@
-// Global variables
-let t; 
-let x; // X position
-let y; // Y position
+let t;
+let increment = 0.001; 
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  background(0);
+  strokeWeight(2);
+  stroke(255);
+  noFill();
   t = 0;
 }
 
 function draw() {
-  background(0, 16);
+  background(0, 15);
+makeCircle(4, 50, 600)
+  // TODO: Call the makeCircle() function with 4 for xPos, 50 for yPos and 600 for circleSize
 
-  noStroke();
-  fill(255);
 
-  // TODO: Set the x position to incorporate the noise function
-x = width * noise(t+15)
+  // TODO: Call the makeCircle() function with 0 for xPos, 200 for yPos and 200 for circleSize
 
-  // TODO: Set the y position to incorporate the noise function
-y = height * noise(t + 5)
+makeCircle(0, 200, 200)
+  // TODO: Call the makeCircle() function with 100 for xPos, 200 for yPos and 1 for circleSize
+makeCircle(100, 200, 1)
+}
 
-  // TODO: Draw an ellipse with the variables for x and y passed in
-ellipse(x, y, 150, 150)
+function makeCircle(xPos, yPos, circleSize) { 
+  let x = width * noise(t + xPos);
+  let y = height * noise(t + yPos);
+  let size = width * noise(t + circleSize);
 
-  // TODO: Increment the t variable to control the noise amount
-t += 0.005
+  ellipse(x, y, size, size);
+
+  t += increment;
 }
