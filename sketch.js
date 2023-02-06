@@ -1,41 +1,62 @@
-let yellowX, yellowY;
-let blueX, blueY;
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
-  yellowX = width / 2;
-  yellowY = height / 2;
-
-  blueX = width / 2;
-  blueY = height / 2;
-
-  strokeWeight(5);
+  // Color Mode is set to HSB
+  // 100 is the maximum value for all Hue, Saturation and Brightness
+  colorMode(HSB, 100);
 }
 
 function draw() {
-  background(255, 10);
+  background(0, 0, 0);
 
-  // TODO: Add push and pop to isolate the yellow spiral
-push();
-  translate(yellowX, yellowY); // Start of code for yellow spiral
-  rotate(frameCount * 0.001);
-  stroke(255, 255, 0, 30);
-  for (let i = 0; i < 24; i++) {
-    rotate(PI / 12);
-    line(0, 0, 0, 160);
-  } // End of code for yellow spiral
-pop();
-  
-  // TODO: Add push and pop to isolate the blue spiral
-push();
-  translate(blueX, blueY); // Start of code for blue spiral
-  rotate(frameCount * 0.001 + PI / 8);
-  stroke(0, 0, 255, 30);
-  for (let i = 0; i < 24; i++) {
-    rotate(PI / 12);
-    line(0, 0, 0, 240);
-  } // End of code for blue spiral
-pop();
+  // Top-left corner
+  push();
+  translate(width / 4, height / 4);
+  rotate(radians(frameCount));
+  flowerGrad(5);
+  pop();
 
+  // Top-right corner
+  push();
+  translate(width - width / 4, height / 4);
+  rotate(radians(frameCount * 5));
+  flowerGrad(2);
+  pop();
+
+  // Bottom-left corner
+  push();
+  translate(width /4 , height - height / 4);
+  rotate(radians(frameCount * 10));
+  flowerGrad(15);
+  pop();
+
+  // Bottom-right corner
+  push();
+  translate(width - width / 4, height - height / 4);
+  rotate(radians(frameCount / 4));
+  flowerGrad(12);
+  pop();
+}
+
+// Generates gradient colored flowers with given number of petals
+function flowerGrad(petal) {
+  let radius = width / 6;
+
+  for (let i = radius; i > 0; i -= petal) {
+    for (let j = 0; j < 8; j++) {
+      push();
+      ellipseMode(CORNER);
+      rotate(TWO_PI * j / 4);
+      let hue = map(i, 0, radius, 40, 100);
+      stroke(hue, 100, 100);
+      fill(hue, 100, 100);
+      ellipse(0, 0, i);
+      pop();
+
+      // center of the flower
+      ellipseMode(CENTER);
+      noStroke();
+      fill(15, 0, 0);
+      ellipse(0, 0, width / 36);
+    }
+  }
 }
