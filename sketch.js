@@ -3,31 +3,24 @@ function setup() {
 }
 
 function draw() {
-  background(0);
-  fill(0);
+  background(0, 15);
+  stroke(0, 0, 255);
+  fill(255, 0, 0, 50);
+  
+  // TODO: Specify the rectangle's origin point to be center
+rectMode(CENTER)
 
-  // TODO: Rotate the ellipse pattern by a quarter pi
+  // TODO: Translate rectangle to the center of canvas
+translate(width/2, height/2)
+
+  // TODO: Rotate rectangle by a quarter pi
 rotate(QUARTER_PI);
-  // TODO: Specify the angle mode to be degrees
-angleMode(DEGREES)
+  rect(0, 0, 450, 450); // First rectangle
 
-  // TODO: Rotate by 30 degrees
-  
-rotate(30)
-  for (let i = 0; i < width *2 ; i += 75) {
-    for (let j = 0; j < height *2 ; j += 75) {
-      fill(255, 0, 0, 180);
-      ellipse(i, j, 50, 50);
-    }
-  }
+  stroke(0, 0, 255);
+  fill(255, 0);
 
-  // TODO: Rotate by frameCount * 10
-  rotate(radians(frameCount*10));
-  
-  for (let i = 0; i < width *2 ; i += 75) {
-    for (let j = 0; j < height * 2; j += 75) {
-      fill(0, 0, 255, 180);
-      rect(i, j, 50, 50);
-    }
-  }
-}
+  // TODO: Rotate rectangle by frameCount / 2 in radians
+rotate(radians(frameCount/2))
+  rect(0, 0, 450, 450); // Second rectangle
+};
