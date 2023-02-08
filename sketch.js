@@ -1,37 +1,29 @@
-let fillValue; // Used to modify the ellipse's fill color
-let shapeScale; // Used to scale the size of the ellipse
+// Stores diagnal distance across the canvas
+let canvas_dist;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   noStroke();
 
-  fillValue = 0;
-  shapeScale = 50;
-} 
+  // TODO: Use the dist() function to calculate the diagonal distance across the canvas
+  canvas_dist = dist( 0, 0, width, height)
+}
 
 function draw() {
-  background(75, 50);
+  background(255, 40);
 
-  // TODO: Add if statement to check if mouseIsPressed and set fill colors accordingly
-if (mouseIsPressed) {
-  fill(fillValue, 0, 0, 50)
-} else {
-  fill(0, 0, fillValue, 50);
-}
-
-  ellipse(width / 2, height / 2, shapeScale, shapeScale);
-}
-
-// TODO: Create a mouseMoved() function and inside the function, set fillValue to a random number between 0 and 255
-function mouseMoved() {
-  fillValue = random(0, 255)
-}
-
-// TODO: Create a mousePressed() function and inside the function, modify shapeScale variable
-function mousePressed() {
-  if (shapeScale < width) {
-  shapeScale  *= 2
-  } else {
-    shapeScale = 50
+  // Nested for loops tp draw a grid of ellipses
+  for (let i = 0; i <= width; i += 15) {
+    for (let j = 0; j <= height; j += 15) {
+      // TODO: Calculate the distance between mouse position and each ellipse's position
+let size = dist (mouseX, mouseY, i, j)
+      // TODO: Reassign size to be proportional to the size of the canvas
+      size  = (size / canvas_dist) * 70;
+      fill(0);
+      // Try uncommenting the second fill function below:
+      fill(j, i,size, 10 );
+      // TODO: set width and height of ellipse to size variable
+      ellipse(i, j, size, size);
+    }
   }
 }
