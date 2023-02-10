@@ -1,14 +1,24 @@
-let img;
-let imagePath = 'https://static-assets.codecademy.com/Courses/Learn-p5/media/cutePuppy.jpg';
+let img1, img2, img3, img4;
 
-function setup() {
-  createCanvas(300, 400);
-  //Load image here:
-img = loadImage('https://static-assets.codecademy.com/Courses/Learn-p5/media/cutePuppy.jpg')
+let imagePath = `https://static-assets.codecademy.com/Courses/Learn-p5/media/cutePuppySquare.jpg`;
+
+function preload() {
+  img1 = loadImage(imagePath);
+  img2 = loadImage(imagePath);
+  img3 = loadImage(imagePath);
+  img4 = loadImage(imagePath);
 }
 
-function draw() {
-  background(220);
-  //Draw image here:
-image(img, 0, 0, width, height)
+function setup() {
+  createCanvas(400, 400);
+  //TODO: Apply filters here
+img1.filter(GRAY);
+img2.filter(INVERT);
+img3.filter(POSTERIZE, 4);
+img4.filter(THRESHOLD, 0.7)
+  //Draws the 4 images to the canvas
+  image(img1, 0, 0, 200, 200);
+  image(img2, 0, 200, 200, 200);
+  image(img3, 200, 0, 200, 200);
+  image(img4, 200, 200, 200, 200);
 }
