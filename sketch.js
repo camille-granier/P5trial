@@ -1,48 +1,24 @@
-let img;
-let imagePath = 'https://static-assets.codecademy.com/Courses/Learn-p5/media/smiley.png';
+let video;
+let videoPath = 'https://static-assets.codecademy.com/Courses/Learn-p5/media/UFO.mp4';
 
 function preload(){
-  img = loadImage(imagePath);
+  video = createVideo(videoPath);
 }
+
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-  
-  //Iterates through all pixels in the image
-  for (let i = 0; i < img.width; i++){
-    for (let j = 0; j < img.height; j++){
-      //TODO: Get the color at the current pixel
-let pix = img.get(i, j);
-      //TODO: Check if the current pixel is black.
-      //      If so, set it to blue.
-      let blue = [0, 0, 255, 255];
-if (isPixelBlack(pix)) {
-  img.set(i, j, [0, 0, 255, 255]);
-}
-    }
-  }
-  //TODO: Remember to update the pixels!
-img.updatePixels();
+  //TODO: Set pixel density to 1
+pixelDensity(1);
+  createCanvas(480, 270);
+  //Creates a background with a play symbol
+  background(0);
+  triangle(215, 110, 275, 140, 215, 170);
+  //Hides the original HTML video element
+  video.hide();
 }
 
-// isPixelBlack() takes in a  length-4 rgba color array, 
-// and returns true when the color is pure black,
-// i.e. [0, 0, 0, 255]
-// Examples:
-//   isPixelBlack([0, 0, 0, 255]) == true
-//   isPixelBlack([255, 0, 0, 255]) == false
-function isPixelBlack(colorArray){
-  return (colorArray[0] == 0 &&
-     colorArray[1] == 0 &&
-     colorArray[2] == 0 &&
-     colorArray[3] == 255);
-}
-
-//Draw the smiley wherever you move your cursor
 function draw() {
-  image(img, mouseX, mouseY);
-};
-
-//Resize the canvas to the size of the window
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+  //TODO: Load video pixels
+video.loadPixels()
+  //Draw the video to the canvas
+  image(video, 0, 0, 480, 270);
 }
