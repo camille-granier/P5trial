@@ -1,24 +1,48 @@
-let img1, img2, img3, img4;
+let img;
+let imagePath = 'https://static-assets.codecademy.com/Courses/Learn-p5/media/smiley.png';
 
-let imagePath = `https://static-assets.codecademy.com/Courses/Learn-p5/media/cutePuppySquare.jpg`;
-
-function preload() {
-  img1 = loadImage(imagePath);
-  img2 = loadImage(imagePath);
-  img3 = loadImage(imagePath);
-  img4 = loadImage(imagePath);
+function preload(){
+  img = loadImage(imagePath);
+}
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  
+  //Iterates through all pixels in the image
+  for (let i = 0; i < img.width; i++){
+    for (let j = 0; j < img.height; j++){
+      //TODO: Get the color at the current pixel
+let pix = img.get(i, j);
+      //TODO: Check if the current pixel is black.
+      //      If so, set it to blue.
+      let blue = [0, 0, 255, 255];
+if (isPixelBlack(pix)) {
+  img.set(i, j, [0, 0, 255, 255]);
+}
+    }
+  }
+  //TODO: Remember to update the pixels!
+img.updatePixels();
 }
 
-function setup() {
-  createCanvas(400, 400);
-  //TODO: Apply filters here
-img1.filter(GRAY);
-img2.filter(INVERT);
-img3.filter(POSTERIZE, 4);
-img4.filter(THRESHOLD, 0.7)
-  //Draws the 4 images to the canvas
-  image(img1, 0, 0, 200, 200);
-  image(img2, 0, 200, 200, 200);
-  image(img3, 200, 0, 200, 200);
-  image(img4, 200, 200, 200, 200);
+// isPixelBlack() takes in a  length-4 rgba color array, 
+// and returns true when the color is pure black,
+// i.e. [0, 0, 0, 255]
+// Examples:
+//   isPixelBlack([0, 0, 0, 255]) == true
+//   isPixelBlack([255, 0, 0, 255]) == false
+function isPixelBlack(colorArray){
+  return (colorArray[0] == 0 &&
+     colorArray[1] == 0 &&
+     colorArray[2] == 0 &&
+     colorArray[3] == 255);
+}
+
+//Draw the smiley wherever you move your cursor
+function draw() {
+  image(img, mouseX, mouseY);
+};
+
+//Resize the canvas to the size of the window
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
