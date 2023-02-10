@@ -6,8 +6,8 @@ function preload(){
 }
 
 function setup() {
-  //TODO: Set pixel density to 1
-pixelDensity(1);
+  //Set pixel density to 1
+  pixelDensity(1);
   createCanvas(480, 270);
   //Creates a background with a play symbol
   background(0);
@@ -17,8 +17,19 @@ pixelDensity(1);
 }
 
 function draw() {
-  //TODO: Load video pixels
-video.loadPixels()
+  //Load video pixels
+  video.loadPixels();
+  //Iterate through all pixels in the video
+  let stepSize = 1;
+  for (let y = 0; y < video.height; y += stepSize){
+    for (let x = 0; x < video.width; x += stepSize){
+      //TODO: Manipulate pixels array
+let indexOfRed = (x + y * video.width) * 4;
+video.pixels[indexOfRed + 1] = random(100)
+    }
+  }
+  //TODO: Update the pixels in the video
+  video.updatePixels();
   //Draw the video to the canvas
   image(video, 0, 0, 480, 270);
 }
